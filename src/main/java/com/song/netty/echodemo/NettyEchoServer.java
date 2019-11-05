@@ -1,6 +1,7 @@
-package com.song.netty;
+package com.song.netty.echodemo;
 
-import com.song.netty.handler.NettyDiscardHandler;
+import com.song.netty.NettyDemoConfig;
+import com.song.netty.echodemo.handler.NettyEchoServerInHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.ChannelFuture;
@@ -11,13 +12,13 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-public class NettyDiscardServer {
+public class NettyEchoServer {
 
     private final int serverPort;
 
     ServerBootstrap b = new ServerBootstrap();
 
-    public NettyDiscardServer(int port) {
+    public NettyEchoServer(int port) {
         this.serverPort = port;
     }
 
@@ -40,7 +41,8 @@ public class NettyDiscardServer {
             b.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel channel) throws Exception {
-                    channel.pipeline().addLast(new NettyDiscardHandler());
+                    channel.pipeline().addLast(new NettyEchoServerInHandler());
+//                    channel.pipeline().addLast(new NettyEchoServerHandler());
                 }
             });
             ChannelFuture channelFuture = b.bind().sync();
@@ -60,6 +62,6 @@ public class NettyDiscardServer {
     }
 
     public static void main(String[] args) {
-        new NettyDiscardServer(NettyDemoConfig.SOCKET_SERVER_PORT).runServer();
+        new NettyEchoServer(NettyDemoConfig.SOCKET_SERVER_PORT).runServer();
     }
 }

@@ -1,4 +1,4 @@
-package com.song.netty;
+package com.song.netty.handler;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;

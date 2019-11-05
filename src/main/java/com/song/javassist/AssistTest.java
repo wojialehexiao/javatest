@@ -9,7 +9,7 @@ public class AssistTest {
     public static void main(String[] args) throws Exception {
         ClassPool pool = ClassPool.getDefault();
 
-        CtClass ctClass = pool.makeClass("com.song.test.Test");
+        CtClass ctClass = pool.makeClass("com.song.test.TestDemo");
 
         CtMethod ctMethod = CtMethod.make("public void test(){}",ctClass);
         ctClass.addMethod(ctMethod);
